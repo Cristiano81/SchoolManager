@@ -1,0 +1,36 @@
+tabella anno scolastico
+id
+anno inizio
+anno fine
+
+tabella insegnanti
+id
+nome
+cognome
+email
+telefono
+
+tabella studenti
+id
+nome
+cognome
+email
+telefono
+
+tabella genitori?
+
+tabella classe
+id
+nome
+
+tabella studenti classe
+id
+id anno scolastico
+id classe
+id studente
+
+tabella insegnanti classe
+id
+id anno scolastico
+id classe
+id insegnante
