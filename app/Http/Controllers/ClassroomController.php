@@ -58,7 +58,7 @@ class ClassroomController extends Controller
      */
     public function show(Classroom $classroom)
     {
-        return view('classroom.show', compact('classroom'));
+        return view('classrooms.show', compact('classroom'));
     }
 
     /**
@@ -69,7 +69,7 @@ class ClassroomController extends Controller
      */
     public function edit(Classroom $classroom)
     {
-        return view('classroom.edit', compact('classroom'));
+        return view('classrooms.edit', compact('classroom'));
     }
 
     /**

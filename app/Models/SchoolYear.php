@@ -22,6 +22,11 @@ class SchoolYear extends Model
         return $rarray;
     }
 
+    public static function getname($id) {
+        $schoolyear = SchoolYear::find($id);
+        return $schoolyear->startYear . "/" . $schoolyear->endYear;
+    }
+
     public function classrooms()
     {
         return $this->hasMany('App\Models\Classroom','schoolyear_id');

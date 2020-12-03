@@ -9,7 +9,7 @@
                 <div class="card card-plain">
                     <div class="card-header card-header-primary">
                         <h4 class="card-title ">Classrooms</h4>
-                        <p class="card-category"> Here you can add a classroom</p>
+                        <p class="card-category"> Here you can update a classroom</p>
                     </div>
                     <div class="card-body">
                         <div class="row">
@@ -20,15 +20,15 @@
                             <!-- if there are creation errors, they will show here -->
                             {{ Html::ul($errors->all()) }}
 
-                            {{ Form::open(array('url' => 'classroom')) }}
+                            {{ Form::open(array('method'=>'PUT','route' => ['classroom.update',$classroom->id])) }}
                             <div class="form-group">
                                 {{ Form::label('schoolyear_id', 'School Year') }}
-                                {{ Form::select('schoolyear_id', array_merge(\App\Models\SchoolYear::alldropdown()), '')}}
+                                {{ Form::select('schoolyear_id', array_merge(\App\Models\SchoolYear::alldropdown()), $classroom->schoolyear_id)}}
 
                             </div>
                             <div class="form-group">
                                 {{ Form::label('name', 'Name') }}
-                                {{ Form::text('name', Input::old('name'), array('class' => 'form-control')) }}
+                                {{ Form::text('name', $classroom->name, array('class' => 'form-control')) }}
                             </div>
 
 

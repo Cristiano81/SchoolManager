@@ -11,7 +11,7 @@ class Classroom extends Model
     protected $fillable = [
         'name','schoolyear_id'
     ];
-    
+
     public function schoolyear()
     {
         return $this->belongsTo('App\Models\SchoolYear','schoolyear_id');
