@@ -86,7 +86,7 @@ class StudentController extends Controller
         $validatedData = $request->validate([
             'name' => 'required',
             'surname' => 'required',
-            'email' => 'required|email|unique:students,email',
+            'email' => 'required|email|unique:students,email,' . $id,
             'telephone'=>'required'
         ]);
         $student = Student::find($id);

@@ -11,7 +11,15 @@ class Classroom extends Model
     protected $fillable = [
         'name','schoolyear_id'
     ];
-
+    public static function alldropdown() {
+        $classrooms = Classroom::all();
+        $rarray = array();
+        $rarray[0]="Select";
+        foreach ($classrooms as $classroom) {
+            $rarray[$classroom->id]=$classroom->name . " A.S. " . $classroom->schoolyear->startYear . "/" . $classroom->schoolyear->endYear;
+        }
+        return $rarray;
+    }
     public function schoolyear()
     {
         return $this->belongsTo('App\Models\SchoolYear','schoolyear_id');

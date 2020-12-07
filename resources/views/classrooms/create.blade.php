@@ -23,7 +23,7 @@
                             {{ Form::open(array('url' => 'classroom')) }}
                             <div class="form-group">
                                 {{ Form::label('schoolyear_id', 'School Year') }}
-                                {{ Form::select('schoolyear_id', array_merge(\App\Models\SchoolYear::alldropdown()), '')}}
+                                {{ Form::select('schoolyear_id', array_merge(\App\Models\SchoolYear::alldropdown()),'', array('class'=>'form-control'))}}
 
                             </div>
                             <div class="form-group">
