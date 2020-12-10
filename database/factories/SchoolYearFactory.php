@@ -21,8 +21,11 @@ class SchoolYearFactory extends Factory
      */
     public function definition()
     {
+        $startYear = $this->faker->year();
+        $endYear = intval($startYear)+1;
         return [
-            //
+            'startYear' => $startYear,
+            'endYear' => $endYear,
         ];
     }
 }

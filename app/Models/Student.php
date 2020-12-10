@@ -15,6 +15,6 @@ class Student extends Model
         'telephone'
     ];
     public function classrooms() {
-        return $this->belongsToMany('App\Models\Classroom','classroom_student');
+        return $this->belongsToMany('App\Models\Classroom','classroom_student')->withTimestamps();
     }
 }

@@ -25,9 +25,9 @@ class Classroom extends Model
         return $this->belongsTo('App\Models\SchoolYear','schoolyear_id');
     }
     public function students() {
-        return $this->belongsToMany('App\Models\Student','classroom_student');
+        return $this->belongsToMany('App\Models\Student','classroom_student')->withTimestamps();
     }
     public function teachers() {
-        return $this->belongsToMany('App\Models\Teacher','classroom_teacher');
+        return $this->belongsToMany('App\Models\Teacher','classroom_teacher')->withTimestamps();
     }
 }
