@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\SchoolYearController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -63,6 +64,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('student','App\Http\Controllers\StudentController');
     Route::resource('teacher','App\Http\Controllers\TeacherController');
     Route::resource('schoolyear','App\Http\Controllers\SchoolYearController');
+    Route::get('schoolyear/details/{id}',['as'=>'schoolyear.details','uses'=>'App\Http\Controllers\SchoolYearController@detail'])->where('id', '[0-9]+');
+    Route::get('schoolyear/getClassrooms/{id}',['as'=>'schoolyear.classrooms','uses'=>'App\Http\Controllers\SchoolYearController@getClassrooms'])->where('id', '[0-9]+');
+    Route::get('classroom/getTeachers/{id}',['as'=>'classroom.teachers','uses'=>'App\Http\Controllers\ClassroomController@getTeachers'])->where('id', '[0-9]+');
+    Route::get('classroom/getStudents/{id}',['as'=>'classroom.students','uses'=>'App\Http\Controllers\ClassroomController@getStudents'])->where('id', '[0-9]+');
 });
 
 

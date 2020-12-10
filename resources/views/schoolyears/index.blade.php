@@ -45,6 +45,10 @@
                                             <td>{{$schoolyear['startYear'] . "/" . $schoolyear['endYear']}}</td>
                                             <td>{{$schoolyear->classrooms()->count()}}</td>
                                             <td class="td-actions text-right">
+                                                <a rel="tooltip" class="btn btn-success btn-link" href="{{route('schoolyear.details',$schoolyear['id'])}}" data-original-title="" title="">
+                                                    <i class="material-icons">zoom_in</i>
+                                                    <div class="ripple-container"></div>
+                                                </a>
                                                 <a rel="tooltip" class="btn btn-success btn-link" href="{{route('schoolyear.edit',$schoolyear['id'])}}" data-original-title="" title="">
                                                     <i class="material-icons">edit</i>
                                                     <div class="ripple-container"></div>

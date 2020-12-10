@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Classroom;
 use App\Models\SchoolYear;
 use Illuminate\Http\Request;
 
@@ -60,6 +61,8 @@ class SchoolYearController extends Controller
         return view('schoolyears.show', compact('schoolYear'));
     }
 
+
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -105,4 +108,21 @@ class SchoolYearController extends Controller
         return redirect()->route('schoolyear.index')
             ->with('success', 'School Year deleted successfully');
     }
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\SchoolYear  $schoolYear
+     * @return \Illuminate\Http\Response
+     */
+    public function detail($id)
+    {
+        $schoolYear=SchoolYear::find($id);
+        return view('schoolyears.detail', compact('schoolYear'));
+    }
+    public function getClassrooms($id)
+    {
+        $classrooms=SchoolYear::with('classrooms')->find($id)->classrooms;
+        return json_encode(array('data'=>$classrooms));
+    }
+
 }

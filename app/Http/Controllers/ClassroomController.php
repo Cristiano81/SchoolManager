@@ -103,4 +103,14 @@ class ClassroomController extends Controller
         return redirect()->route('classroom.index')
             ->with('success', 'Classroom deleted successfully');
     }
+    public function getTeachers($id)
+    {
+        $teachers=Classroom::with('teachers')->find($id)->teachers;
+        return json_encode(array('data'=>$teachers));
+    }
+    public function getStudents($id)
+    {
+        $students=Classroom::with('students')->find($id)->students;
+        return json_encode(array('data'=>$students));
+    }
 }
