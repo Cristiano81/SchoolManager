@@ -25,6 +25,19 @@
                                 <a href="{{route('student.create')}}" class="btn btn-sm btn-primary">Add student</a>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-12">
+                                {{ Form::open(array('method'=>'GET','route' => ['student.index'])) }}
+                                <div class="form-group">
+                                    {{ Form::label('student', 'Search student') }}
+                                    {{ Form::text('student', $searchstudent, array('class' => 'form-control')) }}
+
+                                </div>
+                                {{ Form::submit('Search', array('class' => 'btn btn-primary')) }}
+                                {{Form::close()}}
+
+                            </div>
+                        </div>
                         <div class="table-responsive">
                             <table class="table">
                                 <thead class=" text-primary">

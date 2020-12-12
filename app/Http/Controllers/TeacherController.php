@@ -9,15 +9,25 @@ class TeacherController extends Controller
 {
     /**
      * Display a listing of the resource.
-     *
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request  $request)
     {
-        $teachers = Teacher::all();
+        $searchteacher='';
+        if ($request->has('teacher'))
+            $searchteacher=$request->get('teacher');
+        if (strlen($searchteacher)>0)
+            $teachers = Teacher::where('name', 'like', '%' . $searchteacher . '%')
+                ->orWhere('surname', 'like', '%' . $searchteacher . '%')
+                ->orWhere('email', 'like', '%' . $searchteacher . '%')
+                ->orWhere('telephone', 'like', '%' . $searchteacher . '%')
+                ->get();
+        else
+            $teachers = Teacher::all();
 
         return view('teachers.index')
-            ->with('teachers', $teachers);
+            ->with('teachers', $teachers)->with('searchteacher',$searchteacher);
     }
 
     /**

@@ -25,6 +25,19 @@
                                 <a href="{{route('schoolyear.create')}}" class="btn btn-sm btn-primary">Add school year</a>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-12">
+                                {{ Form::open(array('method'=>'GET','route' => ['schoolyear.index'])) }}
+                                <div class="form-group">
+                                    {{ Form::label('year', 'Search year') }}
+                                    {{ Form::text('year', $searchyear, array('class' => 'form-control')) }}
+
+                                </div>
+                                {{ Form::submit('Search', array('class' => 'btn btn-primary')) }}
+                                {{Form::close()}}
+
+                            </div>
+                        </div>
                         <div class="table-responsive">
                             <table class="table">
                                 <thead class=" text-primary">

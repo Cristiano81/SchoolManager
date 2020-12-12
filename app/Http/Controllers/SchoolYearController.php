@@ -10,15 +10,21 @@ class SchoolYearController extends Controller
 {
     /**
      * Display a listing of the resource.
-     *
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $schoolyears = SchoolYear::all();
+        $searchyear='';
+        if ($request->has('year'))
+            $searchyear=intval($request->get('year'));
+        if ($searchyear>0)
+            $schoolyears = SchoolYear::where('startYear', '=', $searchyear)->orWhere('endYear', '=', $searchyear)->get();
+        else
+            $schoolyears = SchoolYear::all();
 
         return view('schoolyears.index')
-            ->with('schoolyears', $schoolyears);
+            ->with('schoolyears', $schoolyears)->with('searchyear',$searchyear);
     }
 
     /**

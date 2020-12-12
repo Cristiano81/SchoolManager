@@ -10,15 +10,22 @@ class ClassroomController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request  $request)
     {
+        $searchclassroom='';
+        if ($request->has('classroom'))
+            $searchclassroom=$request->get('classroom');
+        if (strlen($searchclassroom)>0)
+            $classrooms = Classroom::where('name', 'like', '%' . $searchclassroom . '%')->get();
+        else
+            $classrooms = Classroom::all();
 
-        $classrooms = Classroom::all();
 
         return view('classrooms.index')
-            ->with('classrooms', $classrooms);
+            ->with('classrooms', $classrooms)->with('searchclassroom',$searchclassroom);
     }
 
     /**

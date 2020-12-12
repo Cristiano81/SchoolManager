@@ -10,14 +10,25 @@ class StudentController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request  $request)
     {
-        $students = Student::all();
+        $searchstudent='';
+        if ($request->has('student'))
+            $searchstudent=$request->get('student');
+        if (strlen($searchstudent)>0)
+            $students = Student::where('name', 'like', '%' . $searchstudent . '%')
+                ->orWhere('surname', 'like', '%' . $searchstudent . '%')
+                ->orWhere('email', 'like', '%' . $searchstudent . '%')
+                ->orWhere('telephone', 'like', '%' . $searchstudent . '%')
+                ->get();
+        else
+            $students = Student::all();
 
         return view('students.index')
-            ->with('students', $students);
+            ->with('students', $students)->with('searchstudent',$searchstudent);
     }
 
     /**

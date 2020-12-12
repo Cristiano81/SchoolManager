@@ -15,6 +15,19 @@
                                 <a href="{{route('classroom.create')}}" class="btn btn-sm btn-primary">Add classroom</a>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-12">
+                                {{ Form::open(array('method'=>'GET','route' => ['classroom.index'])) }}
+                                <div class="form-group">
+                                    {{ Form::label('classroom', 'Search classroom') }}
+                                    {{ Form::text('classroom', $searchclassroom, array('class' => 'form-control')) }}
+
+                                </div>
+                                {{ Form::submit('Search', array('class' => 'btn btn-primary')) }}
+                                {{Form::close()}}
+
+                            </div>
+                        </div>
                         <div class="table-responsive">
                             <table class="table">
                                 <thead class=" text-primary">
