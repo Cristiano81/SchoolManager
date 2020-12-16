@@ -19,7 +19,9 @@ class ClassroomController extends Controller
         if ($request->has('classroom'))
             $searchclassroom=$request->get('classroom');
         if (strlen($searchclassroom)>0)
-            $classrooms = Classroom::where('name', 'like', '%' . $searchclassroom . '%')->get();
+            $classrooms = Classroom::whereHas('schoolyear', function($q) use ($searchclassroom) {
+                $q->where('startYear', '=', intval($searchclassroom))->orWhere('endYear', '=', intval($searchclassroom));
+            })->orWhere('name', 'like', '%' . $searchclassroom . '%')->get();
         else
             $classrooms = Classroom::all();
 
@@ -66,6 +68,18 @@ class ClassroomController extends Controller
     public function show(Classroom $classroom)
     {
         return view('classrooms.show', compact('classroom'));
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\Classroom  $classroom
+     * @return \Illuminate\Http\Response
+     */
+    public function build($id)
+    {
+        $classroom = Classroom::find($id);
+        return view('classrooms.build', compact('classroom'));
     }
 
     /**
@@ -119,5 +133,29 @@ class ClassroomController extends Controller
     {
         $students=Classroom::with('students')->find($id)->students;
         return json_encode(array('data'=>$students));
+    }
+    public function attachTeacher(Request $request) {
+        $classroomid = $request->get('classroomid');
+        $teacherid = $request->get('teacherid');
+        $classroom = Classroom::find($classroomid);
+        $classroom->teachers()->attach($teacherid);
+    }
+    public function detachTeacher(Request $request) {
+        $classroomid = $request->get('classroomid');
+        $teacherid = $request->get('teacherid');
+        $classroom = Classroom::find($classroomid);
+        $classroom->teachers()->detach($teacherid);
+    }
+    public function attachStudent(Request $request) {
+        $classroomid = $request->get('classroomid');
+        $studentid = $request->get('studentid');
+        $classroom = Classroom::find($classroomid);
+        $classroom->students()->attach($studentid);
+    }
+    public function detachStudent(Request $request) {
+        $classroomid = $request->get('classroomid');
+        $studentid = $request->get('studentid');
+        $classroom = Classroom::find($classroomid);
+        $classroom->students()->detach($studentid);
     }
 }

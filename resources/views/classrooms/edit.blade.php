@@ -23,7 +23,7 @@
                             {{ Form::open(array('method'=>'PUT','route' => ['classroom.update',$classroom->id])) }}
                             <div class="form-group">
                                 {{ Form::label('schoolyear_id', 'School Year') }}
-                                {{ Form::select('schoolyear_id', array_merge(\App\Models\SchoolYear::alldropdown()), $classroom->schoolyear_id)}}
+                                {{ Form::select('schoolyear_id', array_merge(\App\Models\SchoolYear::alldropdown()), $classroom->schoolyear_id, array('class'=>'form-control'))}}
 
                             </div>
                             <div class="form-group">

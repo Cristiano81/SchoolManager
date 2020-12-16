@@ -52,6 +52,10 @@
                                             <td>{{$classroom['name']}}</td>
                                             <td>{{$classroom->students()->count()}}</td>
                                             <td class="td-actions text-right">
+                                                <a rel="tooltip" class="btn btn-success btn-link" href="{{route('classroom.build',$classroom['id'])}}" data-original-title="" title="">
+                                                    <i class="material-icons">account_box</i>
+                                                    <div class="ripple-container"></div>
+                                                </a>
                                                 <a rel="tooltip" class="btn btn-success btn-link" href="{{route('classroom.edit',$classroom['id'])}}" data-original-title="" title="">
                                                     <i class="material-icons">edit</i>
                                                     <div class="ripple-container"></div>

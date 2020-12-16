@@ -119,4 +119,27 @@ class TeacherController extends Controller
         return redirect()->route('teacher.index')
             ->with('success', 'Teacher deleted successfully');
     }
+
+    /**
+     * Search specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function search(Request $request)
+    {
+        $searchteacher='';
+        if ($request->has('q'))
+            $searchteacher=$request->get('q');
+        if (strlen($searchteacher)>0)
+            $teachers = Teacher::where('name', 'like', '%' . $searchteacher . '%')
+                ->orWhere('surname', 'like', '%' . $searchteacher . '%')
+                ->orWhere('email', 'like', '%' . $searchteacher . '%')
+                ->orWhere('telephone', 'like', '%' . $searchteacher . '%')
+                ->get();
+        else
+            $teachers = Teacher::all();
+        return json_encode(array('data'=>$teachers));
+    }
+
 }

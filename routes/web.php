@@ -68,7 +68,15 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('schoolyear/getClassrooms/{id}',['as'=>'schoolyear.classrooms','uses'=>'App\Http\Controllers\SchoolYearController@getClassrooms'])->where('id', '[0-9]+');
     Route::get('classroom/getTeachers/{id}',['as'=>'classroom.teachers','uses'=>'App\Http\Controllers\ClassroomController@getTeachers'])->where('id', '[0-9]+');
     Route::get('classroom/getStudents/{id}',['as'=>'classroom.students','uses'=>'App\Http\Controllers\ClassroomController@getStudents'])->where('id', '[0-9]+');
+    Route::get('classroom/build/{id}',['as'=>'classroom.build','uses'=>'App\Http\Controllers\ClassroomController@build'])->where('id', '[0-9]+');
+    Route::post('classroom/attachTeacher',['as'=>'classroom.attachteacher','uses'=>'App\Http\Controllers\ClassroomController@attachTeacher']);
+    Route::post('classroom/attachStudent',['as'=>'classroom.attachstudent','uses'=>'App\Http\Controllers\ClassroomController@attachStudent']);
+    Route::post('classroom/detachTeacher',['as'=>'classroom.detachteacher','uses'=>'App\Http\Controllers\ClassroomController@detachTeacher']);
+    Route::post('classroom/detachStudent',['as'=>'classroom.detachstudent','uses'=>'App\Http\Controllers\ClassroomController@detachStudent']);
+    Route::post('teacher/search',['as'=>'teacher.search','uses'=>'App\Http\Controllers\TeacherController@search']);
+    Route::post('student/search',['as'=>'student.search','uses'=>'App\Http\Controllers\StudentController@search']);
 });
+
 
 
 

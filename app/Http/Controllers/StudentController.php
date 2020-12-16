@@ -120,4 +120,26 @@ class StudentController extends Controller
         return redirect()->route('student.index')
             ->with('success', 'Student deleted successfully');
     }
+
+    /**
+     * Search specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function search(Request $request)
+    {
+        $searchstudent='';
+        if ($request->has('q'))
+            $searchstudent=$request->get('q');
+        if (strlen($searchstudent)>0)
+            $students = Student::where('name', 'like', '%' . $searchstudent . '%')
+                ->orWhere('surname', 'like', '%' . $searchstudent . '%')
+                ->orWhere('email', 'like', '%' . $searchstudent . '%')
+                ->orWhere('telephone', 'like', '%' . $searchstudent . '%')
+                ->get();
+        else
+            $students = Student::all();
+        return json_encode(array('data'=>$students));
+    }
 }
